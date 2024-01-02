@@ -5,10 +5,10 @@ import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const weatherTemp = "65°F";
+  const weatherTemp = "80 °F";
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -24,7 +24,6 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(card);
   };
-  console.log(selectedCard);
   return (
     <div>
       <Header onActiveModal={handleActiveModal} />
