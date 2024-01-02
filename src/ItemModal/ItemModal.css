@@ -1,0 +1,8 @@
+.modal__container-preview {
+  background-color: white;
+  max-width: 496px;
+  /* height: 436px; */
+  width: 100%;
+  border-radius: 20px;
+  padding: 20px 28px;
+}

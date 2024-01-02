@@ -3,7 +3,7 @@ import { defaultClothingItems } from "../ultil/constants";
 import WeatherCard from "../WeatherCard/WeatherCard.js";
 import ItemCard from "../ItemCard/ItemCard.js";
 
-function Main({ weatherTemp }) {
+function Main({ weatherTemp, onSelectCard }) {
   return (
     <main className="main">
       <WeatherCard day={true} type="snow" weatherTemp={weatherTemp} />
@@ -11,7 +11,7 @@ function Main({ weatherTemp }) {
         Today is {weatherTemp} / You may want to wear:
         <div className="card__items">
           {defaultClothingItems.map((x) => (
-            <ItemCard x={x} />
+            <ItemCard x={x} onSelectCard={onSelectCard} />
           ))}
         </div>
       </section>

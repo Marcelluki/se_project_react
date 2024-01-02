@@ -4,11 +4,13 @@ import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
+import ItemModal from "./ItemModal/ItemModal";
 import { useState } from "react";
 
 function App() {
   const weatherTemp = "65°F";
   const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
 
   const handleActiveModal = () => {
     setActiveModal("create");
@@ -17,10 +19,16 @@ function App() {
   const handleCloseModal = () => {
     setActiveModal("");
   };
+
+  const handleSelectedCard = (card) => {
+    setActiveModal("preview");
+    setSelectedCard(card);
+  };
+  console.log(selectedCard);
   return (
     <div>
       <Header onActiveModal={handleActiveModal} />
-      <Main weatherTemp={weatherTemp} />
+      <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} />
       <Footer />
       {activeModal === "create" && (
         <ModalWithForm title="New garmet" onClose={handleCloseModal}>
@@ -51,6 +59,10 @@ function App() {
             </div>
           </div>
         </ModalWithForm>
+      )}
+
+      {activeModal === "preview" && (
+        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
       )}
     </div>
   );
