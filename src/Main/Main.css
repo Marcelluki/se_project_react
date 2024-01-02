@@ -1,0 +1,15 @@
+.main {
+  padding: 0 40px;
+}
+
+.card__section {
+  margin-top: 40px;
+}
+
+.card__items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 34px;
+  gap: 17px;
+}

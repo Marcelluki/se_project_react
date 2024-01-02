@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  padding: 0 40px;
+}
+.header__logo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.header__avatar-logo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.header__button {
+  border: none;
+  background-color: white;
+}
