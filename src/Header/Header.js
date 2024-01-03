@@ -16,11 +16,11 @@ const Header = ({ onActiveModal }) => {
             type="text"
             onClick={onActiveModal}
           >
-            + Add New Clothes
+            + Add clothes
           </button>
         </div>
 
-        <div>Name</div>
+        <div>Terrance Tegegne</div>
         <div>
           <img src={require("../images/avatar.svg").default} alt="logo" />
         </div>

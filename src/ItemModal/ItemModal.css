@@ -19,3 +19,11 @@
   top: 26px;
   right: 26px;
 }
+
+.modal__weathertype-preview {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 32px;
+  gap: 12px;
+}

@@ -39,6 +39,7 @@ function App() {
               name="name"
               minLength="1"
               maxLength="30"
+              placeholder="Name"
             />
           </label>
 
@@ -50,12 +51,13 @@ function App() {
               name="link"
               minLength="1"
               maxLength="30"
+              placeholder="URL"
             />
           </label>
 
-          <p>Weather type:</p>
+          <p className="modal__weathertype-title">Weather type:</p>
 
-          <div>
+          <div className="modal__weathertype-radio">
             <div>
               <input type="radio" id="hot" value="hot" />
               <label>Hot</label>

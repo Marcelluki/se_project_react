@@ -24,6 +24,24 @@
   padding: 20px 28px;
 }
 
+.modal__submit-button {
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: white;
+  background-color: #000000;
+  width: 124px;
+  height: 36px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.modal__submit-button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
 .modal__head {
   position: relative;
   /* display: flex; */
@@ -55,10 +73,24 @@
 .modal__label {
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
 }
 
 .modal__input {
   border: none;
-  border-bottom: 2px rgb(0, 0, 0);
+  border-bottom: 1px solid rgb(0, 0, 0);
   outline: none;
+}
+
+.modal__weathertype-title {
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.modal__weathertype-radio {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
 }

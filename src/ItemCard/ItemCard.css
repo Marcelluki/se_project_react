@@ -1,18 +1,22 @@
-.card__image {
+.card__containter {
   position: relative;
+}
+
+.card__image {
   width: 328px;
   height: 328px;
   border-radius: 10px;
 }
 
 .card__name {
-  left: 135px;
-  right: 135px;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
   color: rgba(0, 0, 0, 0.6);
-  background-color: rgb(132, 133, 150);
+  background-color: #ffffff;
   text-align: center;
-  width: 40%;
-  height: 24px;
-  margin: 0 auto;
+  width: auto;
+  padding: 0 12px;
   border-radius: 4px;
 }
