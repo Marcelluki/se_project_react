@@ -1,4 +1,9 @@
 .modal {
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+
   position: fixed;
   top: 0;
   right: 0;
@@ -50,4 +55,10 @@
 .modal__label {
   display: flex;
   flex-direction: column;
+}
+
+.modal__input {
+  border: none;
+  border-bottom: 2px rgb(0, 0, 0);
+  outline: none;
 }

@@ -33,12 +33,24 @@ function App() {
         <ModalWithForm title="New garmet" onClose={handleCloseModal}>
           <label className="modal__label">
             Name
-            <input type="text" name="name" minLength="1" maxLength="30" />
+            <input
+              className="modal__input"
+              type="text"
+              name="name"
+              minLength="1"
+              maxLength="30"
+            />
           </label>
 
           <label className="modal__label">
             Image
-            <input type="url" name="link" minLength="1" maxLength="30" />
+            <input
+              className="modal__input"
+              type="url"
+              name="link"
+              minLength="1"
+              maxLength="30"
+            />
           </label>
 
           <p>Weather type:</p>
