@@ -1,8 +1,21 @@
 .modal__container-preview {
+  position: relative;
   background-color: white;
-  max-width: 496px;
-  /* height: 436px; */
+  max-width: 498px;
+  height: 610px;
   width: 100%;
   border-radius: 20px;
-  padding: 20px 28px;
+}
+
+.modal__image {
+  border-radius: 16px 16px 0 0;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.modal__close.modal__close-item {
+  position: absolute;
+  background-color: transparent;
+  top: 26px;
+  right: 26px;
 }

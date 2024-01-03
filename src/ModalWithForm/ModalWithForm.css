@@ -20,14 +20,19 @@
 }
 
 .modal__head {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: top;
-  justify-content: space-between;
+  position: relative;
+  /* display: flex; */
+  /* flex-direction: row-reverse; */
+  /* align-items: top;
+  justify-content: space-between; */
+
+  /* margin-bottom: 24px; */
 }
 
 .modal__close {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 16px;
   height: 16px;
   background-image: url("../images/close.svg");
@@ -40,5 +45,9 @@
 .modal__title {
   font-size: 16px;
   margin-top: 8px;
-  margin-bottom: 24px;
+}
+
+.modal__label {
+  display: flex;
+  flex-direction: column;
 }

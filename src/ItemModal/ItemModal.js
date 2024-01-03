@@ -4,8 +4,12 @@ const ItemModal = ({ selectedCard, onClose }) => {
   return (
     <div className="modal">
       <div className="modal__container-preview">
-        <button className="modal__close" type="button" onClick={onClose} />
-        <img src={selectedCard.link} />
+        <button
+          className="modal__close modal__close-item"
+          type="button"
+          onClick={onClose}
+        />
+        <img className="modal__image" src={selectedCard.link} />
 
         <div>{selectedCard.name}</div>
 
