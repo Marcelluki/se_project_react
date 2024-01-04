@@ -6,11 +6,11 @@ import { useMemo } from "react";
 
 function Main({ weatherTemp, onSelectCard }) {
   const weatherType = useMemo(() => {
-    if (weatherTemp >= 86 + "°F") {
+    if (weatherTemp >= 86) {
       return "hot";
-    } else if (weatherTemp >= 66 + "°F" && weatherTemp <= 85 + "°F") {
+    } else if (weatherTemp >= 66 && weatherTemp <= 85) {
       return "warm";
-    } else if (weatherTemp <= 65 + "°F") {
+    } else if (weatherTemp <= 65) {
       return "cold";
     }
   }, [weatherTemp]);
