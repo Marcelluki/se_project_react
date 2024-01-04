@@ -5,13 +5,18 @@ import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import ModalWithForm from "./ModalWithForm/ModalWithForm";
 import ItemModal from "./ItemModal/ItemModal";
-import { getForecastWeather, parseWeatherData } from "./ultil/weatherApi";
+import {
+  getForecastWeather,
+  parseCityData,
+  parseWeatherData,
+} from "./ultil/weatherApi";
 import { useState, useEffect } from "react";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
+  const [location, setLocation] = useState("");
 
   const handleActiveModal = () => {
     setActiveModal("create");
@@ -35,11 +40,20 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    getForecastWeather().then((data) => {
+      console.log(data);
+      const city = parseCityData(data);
+      console.log(city);
+      setLocation(city);
+    });
+  }, []);
+
   console.log(temp);
 
   return (
     <div>
-      <Header onActiveModal={handleActiveModal} />
+      <Header onActiveModal={handleActiveModal} location={location} />
       <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
       <Footer />
       {activeModal === "create" && (
