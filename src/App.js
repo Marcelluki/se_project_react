@@ -33,23 +33,19 @@ function App() {
 
   useEffect(() => {
     getForecastWeather().then((data) => {
-      console.log(data);
       const temperature = parseWeatherData(data);
-      console.log(temperature);
+
       setTemp(temperature);
     });
   }, []);
 
   useEffect(() => {
     getForecastWeather().then((data) => {
-      console.log(data);
       const city = parseCityData(data);
-      console.log(city);
+
       setLocation(city);
     });
   }, []);
-
-  console.log(temp);
 
   return (
     <div>
