@@ -78,7 +78,7 @@ function App() {
             />
           </label>
 
-          <p className="modal__weathertype-title">Weather type:</p>
+          <p className="modal__weathertype-title">Select the Weather type:</p>
 
           <div className="modal__weathertype-radio">
             <div>
