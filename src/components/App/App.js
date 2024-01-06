@@ -1,15 +1,15 @@
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
-import Header from "./Header/Header";
-import Main from "./Main/Main";
-import Footer from "./Footer/Footer";
-import ModalWithForm from "./ModalWithForm/ModalWithForm";
-import ItemModal from "./ItemModal/ItemModal";
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 import {
   getForecastWeather,
   parseCityData,
   parseWeatherData,
-} from "./ultil/weatherApi";
+} from "../../utils/weatherApi";
 import { useState, useEffect } from "react";
 
 function App() {
