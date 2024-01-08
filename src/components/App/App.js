@@ -34,16 +34,10 @@ function App() {
   useEffect(() => {
     getForecastWeather().then((data) => {
       const temperature = parseWeatherData(data);
-
-      setTemp(temperature);
-    });
-  }, []);
-
-  useEffect(() => {
-    getForecastWeather().then((data) => {
       const city = parseCityData(data);
 
       setLocation(city);
+      setTemp(temperature);
     });
   }, []);
 
@@ -82,16 +76,16 @@ function App() {
 
           <div className="modal__weathertype-radio">
             <div>
-              <input type="radio" id="hot" value="hot" />
-              <label>Hot</label>
+              <input name="weather-type" type="radio" id="hot" value="hot" />
+              <label for="hot">Hot</label>
             </div>
             <div>
-              <input type="radio" id="warm" value="warm" />
-              <label>Warm</label>
+              <input name="weather-type" type="radio" id="warm" value="warm" />
+              <label for="warm">Warm</label>
             </div>
             <div>
-              <input type="radio" id="cold" value="cold" />
-              <label>Cold</label>
+              <input name="weather-type" type="radio" id="cold" value="cold" />
+              <label for="cold">Cold</label>
             </div>
           </div>
         </ModalWithForm>
