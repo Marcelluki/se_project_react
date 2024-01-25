@@ -1,4 +1,4 @@
-.card__containter {
+.card__container {
   position: relative;
 }
 
@@ -6,6 +6,9 @@
   width: 328px;
   height: 328px;
   border-radius: 10px;
+}
+.card__image:hover {
+  cursor: pointer;
 }
 
 .card__name {

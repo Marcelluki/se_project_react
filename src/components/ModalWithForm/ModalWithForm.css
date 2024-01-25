@@ -40,6 +40,7 @@
 
 .modal__submit-button:hover {
   background-color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 
 .modal__head {
@@ -63,6 +64,10 @@
   background-size: contain;
   border-style: none;
   background-color: white;
+}
+
+.modal__close:hover {
+  cursor: pointer;
 }
 
 .modal__title {
