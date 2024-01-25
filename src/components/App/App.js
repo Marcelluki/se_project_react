@@ -41,7 +41,7 @@ function App() {
         setTemp(temperature);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 
