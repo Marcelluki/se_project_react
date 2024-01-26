@@ -30,7 +30,7 @@ const Header = ({ onActiveModal, location }) => {
 
         <div>Terrance Tegegne</div>
         <div>
-          <img src={avatar} alt="Profile-logo" />
+          <img src={avatar} alt="Profile logo" />
         </div>
       </div>
     </header>
