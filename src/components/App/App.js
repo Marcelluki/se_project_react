@@ -11,12 +11,14 @@ import {
   parseWeatherData,
 } from "../../utils/weatherApi";
 import { useState, useEffect } from "react";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
   const [location, setLocation] = useState("");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleActiveModal = () => {
     setActiveModal("create");
@@ -29,6 +31,11 @@ function App() {
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleToggleSwitchChange = () => {
+    if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
+    if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
   useEffect(() => {
@@ -44,60 +51,75 @@ function App() {
         console.error(error);
       });
   }, []);
+  console.log(currentTemperatureUnit);
 
   return (
     <div>
-      <Header onActiveModal={handleActiveModal} location={location} />
-      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
-      <Footer />
-      {activeModal === "create" && (
-        <ModalWithForm title="New garmet" onClose={handleCloseModal}>
-          <label className="modal__label">
-            Name
-            <input
-              className="modal__input"
-              type="text"
-              name="name"
-              minLength="1"
-              maxLength="30"
-              placeholder="Name"
-            />
-          </label>
+      <CurrentTemperatureUnitContext.provider
+        value={(currentTemperatureUnit, handleToggleSwitchChange)}
+      >
+        <Header onActiveModal={handleActiveModal} location={location} />
+        <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+        <Footer />
+        {activeModal === "create" && (
+          <ModalWithForm title="New garmet" onClose={handleCloseModal}>
+            <label className="modal__label">
+              Name
+              <input
+                className="modal__input"
+                type="text"
+                name="name"
+                minLength="1"
+                maxLength="30"
+                placeholder="Name"
+              />
+            </label>
 
-          <label className="modal__label">
-            Image
-            <input
-              className="modal__input"
-              type="url"
-              name="link"
-              minLength="1"
-              maxLength="30"
-              placeholder="URL"
-            />
-          </label>
+            <label className="modal__label">
+              Image
+              <input
+                className="modal__input"
+                type="url"
+                name="link"
+                minLength="1"
+                maxLength="30"
+                placeholder="URL"
+              />
+            </label>
 
-          <p className="modal__weathertype-title">Select the Weather type:</p>
+            <p className="modal__weathertype-title">Select the Weather type:</p>
 
-          <div className="modal__weathertype-radio">
-            <div>
-              <input name="weather-type" type="radio" id="hot" value="hot" />
-              <label htmlFor="hot">Hot</label>
+            <div className="modal__weathertype-radio">
+              <div>
+                <input name="weather-type" type="radio" id="hot" value="hot" />
+                <label htmlFor="hot">Hot</label>
+              </div>
+              <div>
+                <input
+                  name="weather-type"
+                  type="radio"
+                  id="warm"
+                  value="warm"
+                />
+                <label htmlFor="warm">Warm</label>
+              </div>
+              <div>
+                <input
+                  name="weather-type"
+                  type="radio"
+                  id="cold"
+                  value="cold"
+                />
+                <label htmlFor="cold">Cold</label>
+              </div>
             </div>
-            <div>
-              <input name="weather-type" type="radio" id="warm" value="warm" />
-              <label htmlFor="warm">Warm</label>
-            </div>
-            <div>
-              <input name="weather-type" type="radio" id="cold" value="cold" />
-              <label htmlFor="cold">Cold</label>
-            </div>
-          </div>
-        </ModalWithForm>
-      )}
+          </ModalWithForm>
+        )}
 
-      {activeModal === "preview" && (
-        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
-      )}
+        {activeModal === "preview" && (
+          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+        )}
+      </CurrentTemperatureUnitContext.provider>
     </div>
   );
 }
