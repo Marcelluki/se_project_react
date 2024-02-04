@@ -7,6 +7,8 @@ const ModalWithForm = ({
   title,
   onClose,
   name,
+  isOpen,
+  onSubmit,
 }) => {
   return (
     <div className={`modal modal_type_${name}`}>
@@ -16,9 +18,10 @@ const ModalWithForm = ({
 
           <h3 className="modal__title">{title}</h3>
         </div>
-        <form className="modal__form">
+        <form onSubmit={onSubmit} className="modal__form">
           {children}
-          <button disabled className="modal__submit-button" type="submit">
+          <button className="modal__submit-button" type="submit">
+            {/* Removed "disabled" from button to follow with video */}
             {buttonText}
           </button>
         </form>
