@@ -33,7 +33,9 @@ const Header = ({ onActiveModal, location }) => {
           </button>
         </div>
 
-        <Link to="/profile">Terrance Tegegne</Link>
+        <Link className="header__name" to="/profile">
+          Terrance Tegegne
+        </Link>
         <div>
           <img src={avatar} alt="Profile logo" />
         </div>

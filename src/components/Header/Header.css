@@ -32,3 +32,8 @@
   border: none;
   background-color: white;
 }
+
+.header__name {
+  text-decoration: none;
+  color: black;
+}

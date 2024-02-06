@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const AddItemModal = (handleCloseModal, onAddItem, isOpen) => {
+const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
     console.log(e.target.value);
     setName(e.target.value);
+  };
+
+  const [link, setUrl] = useState("");
+  const handleUrlChange = (e) => {
+    console.log(e.target.value);
+    setUrl(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddItem({ name, link });
   };
 
   return (
@@ -13,7 +24,7 @@ const AddItemModal = (handleCloseModal, onAddItem, isOpen) => {
       title="New garmet"
       onClose={handleCloseModal}
       isOpen={isOpen}
-      onSubmit={(e) => onAddItem(e, { name })}
+      onSubmit={handleSubmit}
     >
       <label className="modal__label">
         Name
@@ -38,6 +49,8 @@ const AddItemModal = (handleCloseModal, onAddItem, isOpen) => {
           minLength="1"
           maxLength="30"
           placeholder="URL"
+          value={link}
+          onChange={handleUrlChange}
         />
       </label>
 

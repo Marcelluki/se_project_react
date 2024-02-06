@@ -6,6 +6,7 @@ import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import Profile from "../Profile/Profile";
 import {
   getForecastWeather,
   parseCityData,
@@ -35,9 +36,7 @@ function App() {
     setSelectedCard(card);
   };
 
-  const onAddItem = (e, values) => {
-    e.preventDefault();
-    console.log(e);
+  const onAddItem = (values) => {
     console.log(values);
   };
 
@@ -71,7 +70,9 @@ function App() {
           <Route exact path="/">
             <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
           </Route>
-          <Route path="/profile">Profile</Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
         </Switch>
         <Footer />
         {activeModal === "create" && (
