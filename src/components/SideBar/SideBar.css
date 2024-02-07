@@ -1,0 +1,12 @@
+.profile__section {
+  display: flex;
+  align-items: center;
+  width: 229px;
+  height: 56px;
+  gap: 16px;
+}
+
+.header__name {
+  text-decoration: none;
+  color: black;
+}

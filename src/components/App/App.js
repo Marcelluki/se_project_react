@@ -12,6 +12,8 @@ import {
   parseCityData,
   parseWeatherData,
 } from "../../utils/weatherApi";
+
+import { getClothingItems } from "../../utils/api";
 import { useState, useEffect } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
@@ -22,7 +24,7 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [location, setLocation] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-
+  const [items, setItems] = useState([]);
   const handleActiveModal = () => {
     setActiveModal("create");
   };
@@ -60,6 +62,13 @@ function App() {
   }, []);
   console.log(currentTemperatureUnit);
 
+  useEffect(() => {
+    getClothingItems().then((data) => {
+      setItems(data);
+      console.log(data);
+    });
+  }, []);
+
   return (
     <div>
       <CurrentTemperatureUnitContext.Provider
@@ -68,10 +77,18 @@ function App() {
         <Header onActiveModal={handleActiveModal} location={location} />
         <Switch>
           <Route exact path="/">
-            <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+            <Main
+              weatherTemp={temp}
+              onSelectCard={handleSelectedCard}
+              items={items}
+            />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <Profile
+              items={items}
+              onSelectCard={handleSelectedCard}
+              onActiveModal={handleActiveModal}
+            />
           </Route>
         </Switch>
         <Footer />
