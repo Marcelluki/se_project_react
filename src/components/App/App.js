@@ -13,7 +13,7 @@ import {
   parseWeatherData,
 } from "../../utils/weatherApi";
 
-import { getClothingItems } from "../../utils/api";
+import { getClothingItems, addItem } from "../../utils/api";
 import { useState, useEffect } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
@@ -25,6 +25,7 @@ function App() {
   const [location, setLocation] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [items, setItems] = useState([]);
+  // const [clothingItems, setClothingItems] = useState([])
   const handleActiveModal = () => {
     setActiveModal("create");
   };
@@ -38,8 +39,15 @@ function App() {
     setSelectedCard(card);
   };
 
-  const onAddItem = (values) => {
-    console.log(values);
+  // const onAddItem = (values) => {
+  //   console.log(values);
+  // };
+
+  const handleItemSubmit = (item) => {
+    addItem(item).then((newItem) => {
+      items([newItem, ...setItems]);
+      handleCloseModal();
+    });
   };
 
   const handleToggleSwitchChange = () => {
@@ -96,7 +104,8 @@ function App() {
           <AddItemModal
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "create"}
-            onAddItem={onAddItem}
+            // onAddItem={onAddItem}
+            onHandleItemSubmit={handleItemSubmit}
           />
         )}
 

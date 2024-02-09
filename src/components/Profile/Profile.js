@@ -7,7 +7,11 @@ const Profile = ({ items, onSelectCard, onActiveModal }) => (
     <section className="profile__sidebar">
       <SideBar />
     </section>
-    <ClothesSection items={items} onSelectCard={onSelectCard} />
+    <ClothesSection
+      items={items}
+      onSelectCard={onSelectCard}
+      onActiveModal={onActiveModal}
+    />
   </div>
 );
 

@@ -10,3 +10,31 @@
   display: flex;
   justify-content: space-between;
 } */
+
+.profile__items {
+}
+
+.profile__add-clothes {
+  padding-left: 116px;
+  display: flex;
+}
+
+.profile__text {
+  display: flex;
+  text-align: center;
+}
+
+.profile__add-new {
+  border-style: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+
+.profile__clothes-section {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 116px;
+  width: 1015px;
+  /* gap: 21px; */
+}

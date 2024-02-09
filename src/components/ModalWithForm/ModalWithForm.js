@@ -9,6 +9,7 @@ const ModalWithForm = ({
   name,
   isOpen,
   onSubmit,
+  // onHandleItemSubmit,
 }) => {
   return (
     <div className={`modal modal_type_${name}`}>
@@ -20,7 +21,11 @@ const ModalWithForm = ({
         </div>
         <form onSubmit={onSubmit} className="modal__form">
           {children}
-          <button className="modal__submit-button" type="submit">
+          <button
+            className="modal__submit-button"
+            type="submit"
+            onClick={onSubmit}
+          >
             {/* Removed "disabled" from button to follow with video */}
             {buttonText}
           </button>

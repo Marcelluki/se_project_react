@@ -15,3 +15,23 @@ export const getClothingItems = () => {
       console.error(error);
     });
 };
+
+export const addItem = ({ name, weather, imageUrl }) => {
+  return fetch(`${baseUrl}/items`, {
+    method: "Post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      weather,
+      imageUrl,
+    }),
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+  });
+};
