@@ -45,7 +45,7 @@ function App() {
 
   const handleItemSubmit = (item) => {
     addItem(item).then((newItem) => {
-      items([newItem, ...setItems]);
+      setItems([newItem, ...items]);
       handleCloseModal();
     });
   };

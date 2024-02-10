@@ -16,7 +16,7 @@ export const getClothingItems = () => {
     });
 };
 
-export const addItem = ({ name, weather, imageUrl }) => {
+export const addItem = ({ name, imageUrl, weather }) => {
   return fetch(`${baseUrl}/items`, {
     method: "Post",
     headers: {
@@ -24,8 +24,8 @@ export const addItem = ({ name, weather, imageUrl }) => {
     },
     body: JSON.stringify({
       name,
-      weather,
       imageUrl,
+      weather,
     }),
   }).then((res) => {
     if (res.ok) {

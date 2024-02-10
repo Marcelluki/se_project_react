@@ -103,19 +103,36 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
     },
     {
+      "name": "Marcell Rangel",
+      "weather": "cold",
+      "link": "https://images.unsplash.com/ph",
       "_id": 17
     },
     {
+      "name": "asdf",
+      "weather": "warm",
+      "link": "https://images.unsplash.com/ph",
       "_id": 18
     },
     {
       "name": "asdf",
+      "weather": "warm",
       "_id": 19
     },
     {
       "name": "asdf",
       "weather": "cold",
       "_id": 20
+    },
+    {
+      "name": "asdf",
+      "weather": "cold",
+      "_id": 21
+    },
+    {
+      "name": "asdf",
+      "weather": "cold",
+      "_id": 22
     }
   ]
 }

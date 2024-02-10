@@ -28,6 +28,7 @@ const AddItemModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     onHandleItemSubmit({ name, link, weather });
+    debugger;
   };
 
   return (
