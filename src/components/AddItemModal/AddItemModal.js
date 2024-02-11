@@ -13,10 +13,10 @@ const AddItemModal = ({
     setName(e.target.value);
   };
 
-  const [link, setUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const handleUrlChange = (e) => {
     console.log(e.target.value);
-    setUrl(e.target.value);
+    setImageUrl(e.target.value);
   };
 
   const [weather, setWeather] = useState("");
@@ -27,8 +27,7 @@ const AddItemModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onHandleItemSubmit({ name, link, weather });
-    debugger;
+    onHandleItemSubmit({ name, imageUrl, weather });
   };
 
   return (
@@ -60,9 +59,8 @@ const AddItemModal = ({
           type="url"
           name="link"
           minLength="1"
-          maxLength="30"
           placeholder="URL"
-          value={link}
+          value={imageUrl}
           onChange={handleUrlChange}
         />
       </label>
