@@ -15,6 +15,12 @@
 }
 
 .profile__add-clothes {
+  font-family: Cabinet Grotesk;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
+
   padding-left: 116px;
   display: flex;
 }
@@ -25,10 +31,17 @@
 }
 
 .profile__add-new {
+  font-family: Cabinet Grotesk;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: 0em;
   border-style: none;
   background-color: white;
   display: flex;
   align-items: center;
+  opacity: 0.6;
+  padding-left: 20px;
 }
 
 .profile__clothes-section {
@@ -36,5 +49,5 @@
   flex-wrap: wrap;
   padding-left: 116px;
   width: 1015px;
-  /* gap: 21px; */
+  gap: 17px;
 }

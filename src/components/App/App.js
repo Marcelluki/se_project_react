@@ -13,7 +13,7 @@ import {
   parseWeatherData,
 } from "../../utils/weatherApi";
 
-import { getClothingItems, addItem } from "../../utils/api";
+import { getClothingItems, addItem, removeItem } from "../../utils/api";
 import { useState, useEffect } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
@@ -37,6 +37,14 @@ function App() {
   const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleDeleteCard = (item) => {
+    removeItem(item).then(() => {
+      const filteredCards = items.filter((card) => card._id !== item._id);
+      setItems(filteredCards);
+      handleCloseModal();
+    });
   };
 
   // const onAddItem = (values) => {
@@ -110,7 +118,11 @@ function App() {
         )}
 
         {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+          <ItemModal
+            deleteCard={handleDeleteCard}
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+          />
         )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
@@ -118,3 +130,5 @@ function App() {
 }
 
 export default App;
+
+// start db.json mock up server json-server --watch db.json --id _id --port 3001

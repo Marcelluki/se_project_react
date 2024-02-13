@@ -11,7 +11,7 @@ function ClothesSection({ items, onSelectCard, onActiveModal }) {
       <div className="profile__add-clothes">
         <p className="profile__text">Your Items</p>
         <button className="profile__add-new" onClick={onActiveModal}>
-          Add New +
+          + Add New
         </button>
       </div>
       <div className="profile__clothes-section">
