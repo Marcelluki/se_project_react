@@ -97,6 +97,7 @@ function App() {
               weatherTemp={temp}
               onSelectCard={handleSelectedCard}
               items={items}
+              onHandleToggleSwitchChange={handleToggleSwitchChange}
             />
           </Route>
           <Route path="/profile">

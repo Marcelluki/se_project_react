@@ -5,7 +5,12 @@ import ItemCard from "../ItemCard/ItemCard.js";
 import { useMemo, useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
 
-function Main({ weatherTemp, onSelectCard, items }) {
+function Main({
+  weatherTemp,
+  onSelectCard,
+  items,
+  onHandleToggleSwitchChange,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   console.log(currentTemperatureUnit);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
@@ -27,7 +32,7 @@ function Main({ weatherTemp, onSelectCard, items }) {
     <main className="main">
       <WeatherCard day={true} type="snow" weatherTemp={temp} />
       <section className="card__section" id="card-section">
-        Today is {temp} / You may want to wear:
+        Today is {temp} {currentTemperatureUnit} / You may want to wear:
         <div className="card__items">
           {filteredCards.map((item, index) => (
             <ItemCard key={index} item={item} onSelectCard={onSelectCard} />
