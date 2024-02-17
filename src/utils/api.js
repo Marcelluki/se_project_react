@@ -1,19 +1,17 @@
 const baseUrl = "http://localhost:3001";
 
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+};
+
 export const getClothingItems = () => {
   return fetch(`${baseUrl}/items`, {
     method: "GET",
-  })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  }).then(checkResponse);
 };
 
 export const addItem = ({ name, weather, imageUrl }) => {
@@ -27,24 +25,12 @@ export const addItem = ({ name, weather, imageUrl }) => {
       weather,
       imageUrl,
     }),
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-  });
+  }).then(checkResponse);
 };
 
 export const removeItem = ({ _id }) => {
   return fetch(`${baseUrl}/items/${_id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-  });
+  }).then(checkResponse);
 };

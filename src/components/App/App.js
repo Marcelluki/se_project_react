@@ -40,11 +40,15 @@ function App() {
   };
 
   const handleDeleteCard = (item) => {
-    removeItem(item).then(() => {
-      const filteredCards = items.filter((card) => card._id !== item._id);
-      setItems(filteredCards);
-      handleCloseModal();
-    });
+    removeItem(item)
+      .then(() => {
+        const filteredCards = items.filter((card) => card._id !== item._id);
+        setItems(filteredCards);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   // const onAddItem = (values) => {
@@ -52,10 +56,14 @@ function App() {
   // };
 
   const handleItemSubmit = (item) => {
-    addItem(item).then((newItem) => {
-      setItems([newItem, ...items]);
-      handleCloseModal();
-    });
+    addItem(item)
+      .then((newItem) => {
+        setItems([newItem, ...items]);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleToggleSwitchChange = () => {
@@ -79,54 +87,56 @@ function App() {
   console.log(currentTemperatureUnit);
 
   useEffect(() => {
-    getClothingItems().then((data) => {
-      setItems(data);
-      console.log(data);
-    });
+    getClothingItems()
+      .then((data) => {
+        setItems(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
-    <div>
-      <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-      >
-        <Header onActiveModal={handleActiveModal} location={location} />
-        <Switch>
-          <Route exact path="/">
-            <Main
-              weatherTemp={temp}
-              onSelectCard={handleSelectedCard}
-              items={items}
-              onHandleToggleSwitchChange={handleToggleSwitchChange}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile
-              items={items}
-              onSelectCard={handleSelectedCard}
-              onActiveModal={handleActiveModal}
-            />
-          </Route>
-        </Switch>
-        <Footer />
-        {activeModal === "create" && (
-          <AddItemModal
-            handleCloseModal={handleCloseModal}
-            isOpen={activeModal === "create"}
-            // onAddItem={onAddItem}
-            onHandleItemSubmit={handleItemSubmit}
+    <CurrentTemperatureUnitContext.Provider
+      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+    >
+      <Header onActiveModal={handleActiveModal} location={location} />
+      <Switch>
+        <Route exact path="/">
+          <Main
+            weatherTemp={temp}
+            onSelectCard={handleSelectedCard}
+            items={items}
+            onHandleToggleSwitchChange={handleToggleSwitchChange}
           />
-        )}
+        </Route>
+        <Route path="/profile">
+          <Profile
+            items={items}
+            onSelectCard={handleSelectedCard}
+            onActiveModal={handleActiveModal}
+          />
+        </Route>
+      </Switch>
+      <Footer />
+      {activeModal === "create" && (
+        <AddItemModal
+          handleCloseModal={handleCloseModal}
+          isOpen={activeModal === "create"}
+          // onAddItem={onAddItem}
+          onHandleItemSubmit={handleItemSubmit}
+        />
+      )}
 
-        {activeModal === "preview" && (
-          <ItemModal
-            deleteCard={handleDeleteCard}
-            selectedCard={selectedCard}
-            onClose={handleCloseModal}
-          />
-        )}
-      </CurrentTemperatureUnitContext.Provider>
-    </div>
+      {activeModal === "preview" && (
+        <ItemModal
+          deleteCard={handleDeleteCard}
+          selectedCard={selectedCard}
+          onClose={handleCloseModal}
+        />
+      )}
+    </CurrentTemperatureUnitContext.Provider>
   );
 }
 
