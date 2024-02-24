@@ -24,7 +24,7 @@ function Main({
       return "hot";
     } else if (tempInF >= 66) {
       return "warm";
-    } else if (tempInF <= 65) {
+    } else {
       return "cold";
     }
   }, [weatherTemp]);
