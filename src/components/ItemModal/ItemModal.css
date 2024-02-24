@@ -9,8 +9,9 @@
 
 .modal__image {
   border-radius: 16px 16px 0 0;
-  max-width: 100%;
+  width: 498px;
   object-fit: cover;
+  height: 498px;
 }
 
 .modal__close.modal__close-item {

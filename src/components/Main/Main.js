@@ -5,6 +5,8 @@ import ItemCard from "../ItemCard/ItemCard.js";
 import { useMemo, useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext.js";
 
+import { parseWeatherData } from "../../utils/weatherApi.js";
+
 function Main({
   weatherTemp,
   onSelectCard,
@@ -14,26 +16,27 @@ function Main({
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   console.log(currentTemperatureUnit);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
+  const weather = weatherTemp;
 
   const weatherType = useMemo(() => {
-    const tempInF = currentTemperatureUnit === "F" ? temp : temp * 1.8 + 32;
-    const tempInC = currentTemperatureUnit === "C" ? temp : (temp - 32) / 1.8;
+    const tempInF = weather.temperature.F;
     if (tempInF >= 86) {
       return "hot";
-    } else if (tempInF >= 66 && tempInF <= 85) {
+    } else if (tempInF >= 66) {
       return "warm";
     } else if (tempInF <= 65) {
       return "cold";
-    } else {
-      if (tempInC >= 30) {
-        return "hot";
-      } else if (tempInC >= 30 && tempInC <= 29) {
-        return "warm";
-      } else if (tempInC <= 18) {
-        return "cold";
-      }
     }
   }, [weatherTemp]);
+  // else {
+  //   if (tempInC >= 30) {
+  //     return "hot";
+  //   } else if (tempInC >= 30 && tempInC <= 29) {
+  //     return "warm";
+  //   } else if (tempInC <= 18) {
+  //     return "cold";
+  //   }
+  // }
 
   // const weatherType = useMemo(() => {
   //   if (currentTemperatureUnit === "F") {
