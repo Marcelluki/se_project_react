@@ -16,9 +16,12 @@ function Main({
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   console.log(currentTemperatureUnit);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
-  const weather = weatherTemp;
+
+  console.log(temp);
 
   const weatherType = useMemo(() => {
+    const weather = weatherTemp;
+    console.log(weather);
     const tempInF = weather.temperature.F;
     if (tempInF >= 86) {
       return "hot";
