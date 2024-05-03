@@ -4,7 +4,7 @@ import logo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-const Header = ({ onActiveModal, location }) => {
+const Header = ({ onActiveModal, location, onSignUp }) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -36,6 +36,13 @@ const Header = ({ onActiveModal, location }) => {
         <Link className="header__name" to="/profile">
           Terrance Tegegne
         </Link>
+
+        <button className="header__button" type="text" onClick={onSignUp}>
+          Log in
+        </button>
+        <button className="header__button" type="text" onClick={onSignUp}>
+          Sign up
+        </button>
         <div>
           <img src={avatar} alt="Profile logo" />
         </div>

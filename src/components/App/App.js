@@ -13,10 +13,16 @@ import {
   parseWeatherData,
 } from "../../utils/weatherApi";
 
-import { getClothingItems, addItem, removeItem } from "../../utils/api";
+import {
+  getClothingItems,
+  addItem,
+  removeItem,
+  registerUser,
+} from "../../utils/api";
 import { useState, useEffect } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -25,6 +31,7 @@ function App() {
   const [location, setLocation] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [items, setItems] = useState([]);
+  const [user, setUser] = useState([]);
   // const [clothingItems, setClothingItems] = useState([])
   const handleActiveModal = () => {
     setActiveModal("create");
@@ -54,6 +61,16 @@ function App() {
   // const onAddItem = (values) => {
   //   console.log(values);
   // };
+  const handleRegisterSubmit = (user) => {
+    registerUser(user)
+      .then((newUser) => {
+        setUser([newUser, ...user]);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleItemSubmit = (item) => {
     addItem(item)
@@ -101,7 +118,11 @@ function App() {
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <Header onActiveModal={handleActiveModal} location={location} />
+      <Header
+        onSignUp={() => setActiveModal("register")}
+        onActiveModal={handleActiveModal}
+        location={location}
+      />
       <Switch>
         <Route exact path="/">
           <Main
@@ -126,6 +147,13 @@ function App() {
           isOpen={activeModal === "create"}
           // onAddItem={onAddItem}
           onHandleItemSubmit={handleItemSubmit}
+        />
+      )}
+      {activeModal === "register" && (
+        <RegisterModal
+          handleCloseModal={handleCloseModal}
+          isOpen={activeModal === "register"}
+          onHandleRegisterSubmit={handleRegisterSubmit}
         />
       )}
 
