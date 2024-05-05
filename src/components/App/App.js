@@ -18,11 +18,14 @@ import {
   addItem,
   removeItem,
   registerUser,
+  login,
 } from "../../utils/api";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -32,10 +35,10 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [items, setItems] = useState([]);
   const [user, setUser] = useState([]);
-  // const [clothingItems, setClothingItems] = useState([])
   const handleActiveModal = () => {
     setActiveModal("create");
   };
+  const navigate = useNavigate();
 
   const handleCloseModal = () => {
     setActiveModal("");
@@ -64,12 +67,21 @@ function App() {
   const handleRegisterSubmit = (user) => {
     registerUser(user)
       .then((newUser) => {
+        // navigate("/login");
         setUser([newUser, ...user]);
-        handleCloseModal();
+        handleLoginUser();
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleLoginUser = (user) => {
+    if (!user.email || !user.password) {
+      return;
+    }
+    login(user);
+    handleCloseModal();
   };
 
   const handleItemSubmit = (item) => {
@@ -120,6 +132,7 @@ function App() {
     >
       <Header
         onSignUp={() => setActiveModal("register")}
+        onLogin={() => setActiveModal("login")}
         onActiveModal={handleActiveModal}
         location={location}
       />
@@ -147,6 +160,13 @@ function App() {
           isOpen={activeModal === "create"}
           // onAddItem={onAddItem}
           onHandleItemSubmit={handleItemSubmit}
+        />
+      )}
+      {activeModal === "login" && (
+        <LoginModal
+          handleCloseModal={handleCloseModal}
+          isOpen={activeModal === "login"}
+          onHandleLoginUser={handleLoginUser}
         />
       )}
       {activeModal === "register" && (

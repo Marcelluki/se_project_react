@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({
-  handleCloseModal,
-  isOpen,
-  onHandleRegisterSubmit,
-}) => {
+const LoginModal = ({ handleCloseModal, isOpen, onHandleLoginUser }) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     console.log(e.target.value);
@@ -18,30 +14,18 @@ const RegisterModal = ({
     setPassword(e.target.value);
   };
 
-  const [name, setName] = useState("");
-  const handleNameChange = (e) => {
-    console.log(e.target.value);
-    setName(e.target.value);
-  };
-
-  const [avatar, setAvatar] = useState("");
-  const handleAvatarUrlChange = (e) => {
-    console.log(e.target.value);
-    setAvatar(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    onHandleRegisterSubmit({ email, name, avatar, password });
+    onHandleLoginUser({ email, password });
   };
 
   return (
     <ModalWithForm
-      title="Sign up"
+      title="Log in"
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      buttonText="Sign up"
+      buttonText="Log in"
       // onHandleItemSubmit={onHandleItemSubmit}
     >
       <label className="modal__label">
@@ -69,35 +53,8 @@ const RegisterModal = ({
           onChange={handlePasswordChange}
         />
       </label>
-
-      <label className="modal__label">
-        Name
-        <input
-          className="modal__input"
-          type="text"
-          name="name"
-          minLength="1"
-          maxLength="30"
-          placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
-        />
-      </label>
-
-      <label className="modal__label">
-        Avatar URL
-        <input
-          className="modal__input"
-          type="url"
-          name="link"
-          minLength="1"
-          placeholder="URL"
-          value={avatar}
-          onChange={handleAvatarUrlChange}
-        />
-      </label>
     </ModalWithForm>
   );
 };
 
-export default RegisterModal;
+export default LoginModal;
