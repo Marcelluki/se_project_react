@@ -8,7 +8,7 @@ export const checkResponse = (res) => {
   }
 };
 
-export const registerUser = (name, email, password, avatar) => {
+export const registerUser = ({ name, email, password, avatar }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {

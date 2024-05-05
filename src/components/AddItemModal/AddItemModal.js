@@ -36,6 +36,7 @@ const AddItemModal = ({
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      buttonText="Add garmet"
       // onHandleItemSubmit={onHandleItemSubmit}
     >
       <label className="modal__label">
