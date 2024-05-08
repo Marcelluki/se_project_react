@@ -13,17 +13,13 @@ import {
   parseWeatherData,
 } from "../../utils/weatherApi";
 
-import {
-  getClothingItems,
-  addItem,
-  removeItem,
-  registerUser,
-  login,
-} from "../../utils/api";
+import { getClothingItems, addItem, removeItem } from "../../utils/api";
+import { registerUser, login } from "../../utils/auth";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+// import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 
@@ -67,9 +63,11 @@ function App() {
   const handleRegisterSubmit = (user) => {
     registerUser(user)
       .then((newUser) => {
-        // navigate("/login");
+        debugger;
         setUser([newUser, ...user]);
-        handleLoginUser();
+        handleLoginUser(user);
+        handleCloseModal();
+        navigate("/profile");
       })
       .catch((error) => {
         console.log(error);
@@ -136,7 +134,7 @@ function App() {
         onActiveModal={handleActiveModal}
         location={location}
       />
-      <Switch>
+      {/* <Routes>
         <Route exact path="/">
           <Main
             weatherTemp={temp}
@@ -152,7 +150,31 @@ function App() {
             onActiveModal={handleActiveModal}
           />
         </Route>
-      </Switch>
+      </Routes> */}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Main
+              weatherTemp={temp}
+              onSelectCard={handleSelectedCard}
+              items={items}
+              onHandleToggleSwitchChange={handleToggleSwitchChange}
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              items={items}
+              onSelectCard={handleSelectedCard}
+              onActiveModal={handleActiveModal}
+            />
+          }
+        />
+      </Routes>
       <Footer />
       {activeModal === "create" && (
         <AddItemModal
