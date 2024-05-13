@@ -4,7 +4,14 @@ import logo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-const Header = ({ onActiveModal, location, onSignUp, onLogin }) => {
+const Header = ({
+  onActiveModal,
+  location,
+  onSignUp,
+  onLogin,
+  loggedIn,
+  currentUser,
+}) => {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -23,29 +30,43 @@ const Header = ({ onActiveModal, location, onSignUp, onLogin }) => {
       </div>
       <div className="header__avatar-logo">
         <ToggleSwitch />
-        <div>
-          <button
-            className="header__button"
-            type="text"
-            onClick={onActiveModal}
-          >
-            + Add clothes
+        {loggedIn && (
+          <div>
+            <button
+              className="header__button"
+              type="text"
+              onClick={onActiveModal}
+            >
+              + Add clothes
+            </button>
+          </div>
+        )}
+
+        {loggedIn && (
+          <Link className="header__name" to="/profile">
+            {currentUser.name}
+          </Link>
+        )}
+
+        {!loggedIn && (
+          <button className="header__button" type="text" onClick={onLogin}>
+            Log in
           </button>
-        </div>
-
-        <Link className="header__name" to="/profile">
-          Terrance Tegegne
-        </Link>
-
-        <button className="header__button" type="text" onClick={onLogin}>
-          Log in
-        </button>
-        <button className="header__button" type="text" onClick={onSignUp}>
-          Sign up
-        </button>
-        <div>
-          <img src={avatar} alt="Profile logo" />
-        </div>
+        )}
+        {!loggedIn && (
+          <button className="header__button" type="text" onClick={onSignUp}>
+            Sign up
+          </button>
+        )}
+        {loggedIn && (
+          <div>
+            <img
+              className="header__profile-avatar"
+              src={currentUser.avatar}
+              alt="Profile logo"
+            />
+          </div>
+        )}
       </div>
     </header>
   );

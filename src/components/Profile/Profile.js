@@ -2,10 +2,10 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
 
-const Profile = ({ items, onSelectCard, onActiveModal }) => (
+const Profile = ({ items, onSelectCard, onActiveModal, currentUser }) => (
   <div className="profile">
     <section className="profile__sidebar">
-      <SideBar />
+      <SideBar currentUser={currentUser} />
     </section>
     <ClothesSection
       items={items}

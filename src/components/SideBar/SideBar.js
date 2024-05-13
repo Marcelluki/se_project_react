@@ -2,13 +2,17 @@ import "./SideBar.css";
 import avatar from "../../images/avatar.svg";
 import { Link } from "react-router-dom";
 
-const SideBar = () => (
+const SideBar = ({ currentUser }) => (
   <section className="profile__section">
     <div>
-      <img src={avatar} alt="Profile logo" />
+      <img
+        className="profile__avatar"
+        src={currentUser.avatar}
+        alt="Profile logo"
+      />
     </div>
     <Link className="header__name" to="/profile">
-      Terrance Tegegne
+      {currentUser.name}
     </Link>
   </section>
 );

@@ -13,7 +13,13 @@ import {
   parseWeatherData,
 } from "../../utils/weatherApi";
 
-import { getClothingItems, addItem, removeItem } from "../../utils/api";
+import {
+  getClothingItems,
+  addItem,
+  removeItem,
+  checkResponse,
+  getUser,
+} from "../../utils/api";
 import { registerUser, login } from "../../utils/auth";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate, Routes, Route } from "react-router-dom";
@@ -30,7 +36,15 @@ function App() {
   const [location, setLocation] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [items, setItems] = useState([]);
-  const [user, setUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    email: "",
+    avatar: "",
+    _id: "",
+  });
+  const [loggedIn, setLoggedIn] = useState(false);
+  console.log({ currentUser });
+
   const handleActiveModal = () => {
     setActiveModal("create");
   };
@@ -57,29 +71,62 @@ function App() {
       });
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      getUser(token)
+        .then((res) => {
+          handleLogin(res.userId);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      // fetch to the server to get the current user's info
+      // login using that info
+    }
+  }, []);
+
   // const onAddItem = (values) => {
   //   console.log(values);
   // };
   const handleRegisterSubmit = (user) => {
     registerUser(user)
       .then((newUser) => {
-        debugger;
-        setUser([newUser, ...user]);
-        handleLoginUser(user);
+        handleLoginModalSubmit(user);
         handleCloseModal();
         navigate("/profile");
       })
+      .then(checkResponse)
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const handleLoginUser = (user) => {
+  const handleLogin = (user) => {
+    setLoggedIn(true);
+    setCurrentUser({
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      _id: user._id,
+    });
+    handleCloseModal();
+  };
+
+  const handleLoginModalSubmit = (user) => {
     if (!user.email || !user.password) {
       return;
     }
-    login(user);
-    handleCloseModal();
+    login(user)
+      .then((res) => {
+        handleLogin(res);
+        localStorage.setItem("jwt", res.token);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    console.log(user);
   };
 
   const handleItemSubmit = (item) => {
@@ -133,6 +180,8 @@ function App() {
         onLogin={() => setActiveModal("login")}
         onActiveModal={handleActiveModal}
         location={location}
+        loggedIn={loggedIn}
+        currentUser={currentUser}
       />
       {/* <Routes>
         <Route exact path="/">
@@ -171,6 +220,7 @@ function App() {
               items={items}
               onSelectCard={handleSelectedCard}
               onActiveModal={handleActiveModal}
+              currentUser={currentUser}
             />
           }
         />
@@ -188,7 +238,7 @@ function App() {
         <LoginModal
           handleCloseModal={handleCloseModal}
           isOpen={activeModal === "login"}
-          onHandleLoginUser={handleLoginUser}
+          onHandleLoginUser={handleLoginModalSubmit}
         />
       )}
       {activeModal === "register" && (

@@ -14,6 +14,16 @@ export const getClothingItems = () => {
   }).then(checkResponse);
 };
 
+export const getUser = (token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
 export const addItem = ({ name, weather, imageUrl }) => {
   return fetch(`${baseUrl}/items`, {
     method: "Post",

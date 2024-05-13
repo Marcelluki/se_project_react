@@ -12,6 +12,12 @@
   gap: 16px;
 }
 
+.profile__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 21px;
+}
+
 .header__name {
   text-decoration: none;
   color: black;

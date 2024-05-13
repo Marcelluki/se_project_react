@@ -24,6 +24,11 @@
   align-items: center;
 }
 
+.header__profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 21px;
+}
 .header__button {
   font-family: Cabinet Grotesk;
   font-size: 20px;
