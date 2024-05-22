@@ -24,10 +24,12 @@ import { registerUser, login } from "../../utils/auth";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate, Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // import { Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
 
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import * as api from "../../utils/api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -43,6 +45,7 @@ function App() {
     _id: "",
   });
   const [loggedIn, setLoggedIn] = useState(false);
+
   console.log({ currentUser });
 
   const handleActiveModal = () => {
@@ -58,9 +61,35 @@ function App() {
     setActiveModal("preview");
     setSelectedCard(card);
   };
+  const handleCardLike = ({ _id }, isLiked) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        api
+          // the first argument is the card's id
+          .addCardLike({ _id }, token)
+          .then((updatedCard) => {
+            setItems((cards) =>
+              cards.map((item) => (item._id === _id ? updatedCard.data : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        api
+          // the first argument is the card's id
+          .removeCardLike({ _id }, token)
+          .then((updatedCard) => {
+            setItems((cards) =>
+              cards.map((item) => (item._id === _id ? updatedCard.data : item))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
 
   const handleDeleteCard = (item) => {
-    removeItem(item)
+    const token = localStorage.getItem("jwt");
+    removeItem(item, token)
       .then(() => {
         const filteredCards = items.filter((card) => card._id !== item._id);
         setItems(filteredCards);
@@ -130,9 +159,11 @@ function App() {
   };
 
   const handleItemSubmit = (item) => {
-    addItem(item)
-      .then((newItem) => {
-        setItems([newItem, ...items]);
+    const token = localStorage.getItem("jwt");
+    addItem(item, token)
+      .then((res) => {
+        debugger;
+        setItems((items) => [res.data, ...items]);
         handleCloseModal();
       })
       .catch((error) => {
@@ -172,18 +203,19 @@ function App() {
   }, []);
 
   return (
-    <CurrentTemperatureUnitContext.Provider
-      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-    >
-      <Header
-        onSignUp={() => setActiveModal("register")}
-        onLogin={() => setActiveModal("login")}
-        onActiveModal={handleActiveModal}
-        location={location}
-        loggedIn={loggedIn}
-        currentUser={currentUser}
-      />
-      {/* <Routes>
+    <CurrentUserContext.Provider value={{ currentUser }}>
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <Header
+          onSignUp={() => setActiveModal("register")}
+          onLogin={() => setActiveModal("login")}
+          onActiveModal={handleActiveModal}
+          location={location}
+          loggedIn={loggedIn}
+          currentUser={currentUser}
+        />
+        {/* <Routes>
         <Route exact path="/">
           <Main
             weatherTemp={temp}
@@ -200,63 +232,66 @@ function App() {
           />
         </Route>
       </Routes> */}
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <Main
-              weatherTemp={temp}
-              onSelectCard={handleSelectedCard}
-              items={items}
-              onHandleToggleSwitchChange={handleToggleSwitchChange}
-            />
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              items={items}
-              onSelectCard={handleSelectedCard}
-              onActiveModal={handleActiveModal}
-              currentUser={currentUser}
-            />
-          }
-        />
-      </Routes>
-      <Footer />
-      {activeModal === "create" && (
-        <AddItemModal
-          handleCloseModal={handleCloseModal}
-          isOpen={activeModal === "create"}
-          // onAddItem={onAddItem}
-          onHandleItemSubmit={handleItemSubmit}
-        />
-      )}
-      {activeModal === "login" && (
-        <LoginModal
-          handleCloseModal={handleCloseModal}
-          isOpen={activeModal === "login"}
-          onHandleLoginUser={handleLoginModalSubmit}
-        />
-      )}
-      {activeModal === "register" && (
-        <RegisterModal
-          handleCloseModal={handleCloseModal}
-          isOpen={activeModal === "register"}
-          onHandleRegisterSubmit={handleRegisterSubmit}
-        />
-      )}
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <Main
+                weatherTemp={temp}
+                onSelectCard={handleSelectedCard}
+                items={items}
+                onHandleToggleSwitchChange={handleToggleSwitchChange}
+                onCardLike={handleCardLike}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                items={items}
+                onSelectCard={handleSelectedCard}
+                onActiveModal={handleActiveModal}
+                currentUser={currentUser}
+                onCardLike={handleCardLike}
+              />
+            }
+          />
+        </Routes>
+        <Footer />
+        {activeModal === "create" && (
+          <AddItemModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "create"}
+            // onAddItem={onAddItem}
+            onHandleItemSubmit={handleItemSubmit}
+          />
+        )}
+        {activeModal === "login" && (
+          <LoginModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "login"}
+            onHandleLoginUser={handleLoginModalSubmit}
+          />
+        )}
+        {activeModal === "register" && (
+          <RegisterModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "register"}
+            onHandleRegisterSubmit={handleRegisterSubmit}
+          />
+        )}
 
-      {activeModal === "preview" && (
-        <ItemModal
-          deleteCard={handleDeleteCard}
-          selectedCard={selectedCard}
-          onClose={handleCloseModal}
-        />
-      )}
-    </CurrentTemperatureUnitContext.Provider>
+        {activeModal === "preview" && (
+          <ItemModal
+            deleteCard={handleDeleteCard}
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+          />
+        )}
+      </CurrentTemperatureUnitContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

@@ -23,3 +23,28 @@
   padding: 0 12px;
   border-radius: 4px;
 }
+
+.like-button {
+  position: absolute;
+  background-image: url("../../images/not-liked.svg");
+  background-color: transparent; /* Ensures no background color interferes */
+  width: 18px;
+  height: 15px;
+  right: 60px;
+  top: 20px;
+  border: 2px;
+  overflow: visible;
+  background-size: contain; /* Ensures the image fits inside the button */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.like-button-liked {
+  background-image: url("../../images/liked.svg"); /* Change path as needed */
+  background-color: transparent; /* Keeps the background transparent */
+}
+
+.like-button-not-liked {
+  /* The initial state, potentially unnecessary if using just .like-button */
+  background-color: transparent;
+}

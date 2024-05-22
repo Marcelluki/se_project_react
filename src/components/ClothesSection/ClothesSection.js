@@ -1,7 +1,7 @@
 import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({ items, onSelectCard, onActiveModal }) {
+function ClothesSection({ items, onSelectCard, onActiveModal, onCardLike }) {
   //   const filteredCards = items.filter((item) => {
   //     return item.weather.toLowerCase();
   //   });
@@ -16,7 +16,12 @@ function ClothesSection({ items, onSelectCard, onActiveModal }) {
       </div>
       <div className="profile__clothes-section">
         {items.map((item, index) => (
-          <ItemCard key={index} item={item} onSelectCard={onSelectCard} />
+          <ItemCard
+            key={index}
+            item={item}
+            onSelectCard={onSelectCard}
+            onCardLike={onCardLike}
+          />
         ))}
       </div>
     </div>

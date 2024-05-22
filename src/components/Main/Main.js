@@ -12,16 +12,15 @@ function Main({
   onSelectCard,
   items,
   onHandleToggleSwitchChange,
+  onCardLike,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  console.log(currentTemperatureUnit);
-  const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
 
-  console.log(temp);
+  const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
 
   const weatherType = useMemo(() => {
     const weather = weatherTemp;
-    console.log(weather);
+
     const tempInF = weather.temperature.F;
     if (tempInF >= 86) {
       return "hot";
@@ -62,8 +61,9 @@ function Main({
   // }, [weatherTemp]);
 
   const filteredCards = items.filter((item) => {
-    return item.weather.toLowerCase() === weatherType;
+    return item?.weather?.toLowerCase() === weatherType;
   });
+  console.log({ items, weatherType, filteredCards });
 
   return (
     <main className="main">
@@ -72,7 +72,12 @@ function Main({
         Today is {temp} {currentTemperatureUnit} / You may want to wear:
         <div className="card__items">
           {filteredCards.map((item, index) => (
-            <ItemCard key={index} item={item} onSelectCard={onSelectCard} />
+            <ItemCard
+              key={index}
+              item={item}
+              onCardLike={onCardLike}
+              onSelectCard={onSelectCard}
+            />
           ))}
         </div>
       </section>
