@@ -29,6 +29,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import ChangeUserDataModal from "../ChangeUserDataModal/ChangeUserDataModal";
 import * as api from "../../utils/api";
 
 function App() {
@@ -99,6 +100,8 @@ function App() {
         console.error(error);
       });
   };
+
+  const changeUserData = () => {};
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -255,6 +258,7 @@ function App() {
                 onActiveModal={handleActiveModal}
                 currentUser={currentUser}
                 onCardLike={handleCardLike}
+                onChangeData={() => setActiveModal("changeData")}
               />
             }
           />
@@ -282,7 +286,13 @@ function App() {
             onHandleRegisterSubmit={handleRegisterSubmit}
           />
         )}
-
+        {activeModal === "changeData" && (
+          <ChangeUserDataModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "changeData"}
+            // onHandleChangeData={}
+          />
+        )}
         {activeModal === "preview" && (
           <ItemModal
             deleteCard={handleDeleteCard}

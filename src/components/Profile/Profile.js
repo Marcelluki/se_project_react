@@ -8,10 +8,11 @@ const Profile = ({
   onActiveModal,
   currentUser,
   onCardLike,
+  onChangeData,
 }) => (
   <div className="profile">
     <section className="profile__sidebar">
-      <SideBar currentUser={currentUser} />
+      <SideBar currentUser={currentUser} onChangeData={onChangeData} />
     </section>
     <ClothesSection
       items={items}
