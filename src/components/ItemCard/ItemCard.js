@@ -6,7 +6,7 @@ const ItemCard = ({ item, onSelectCard, onCardLike }) => {
   const { currentUser } = useContext(CurrentUserContext);
 
   const isLiked = item.likes.some((like) => {
-    return like.isLiked === currentUser._id;
+    return like === currentUser._id;
   });
 
   const toggleLike = () => {

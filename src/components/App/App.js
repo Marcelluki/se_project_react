@@ -31,6 +31,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ChangeUserDataModal from "../ChangeUserDataModal/ChangeUserDataModal";
 import * as api from "../../utils/api";
+import ConfirmDeleteItemModal from "../ConfirmDeleteItemModal/ConfirmDeleteItemModal";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -101,7 +102,18 @@ function App() {
       });
   };
 
-  const changeUserData = () => {};
+  const handleChangeUserData = ({ name, avatar }) => {
+    const token = localStorage.getItem("jwt");
+    api
+      .updateUserInfo({ name, avatar }, token)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -290,12 +302,21 @@ function App() {
           <ChangeUserDataModal
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "changeData"}
-            // onHandleChangeData={}
+            onHandleChangeData={handleChangeUserData}
+          />
+        )}
+        {activeModal === "confirmDelete" && (
+          <ConfirmDeleteItemModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "confirmDelete"}
+            onConfirmDelete={handleDeleteCard}
+            selectedCard={selectedCard}
           />
         )}
         {activeModal === "preview" && (
           <ItemModal
-            deleteCard={handleDeleteCard}
+            onDelete={() => setActiveModal("confirmDelete")}
+            // deleteCard={handleDeleteCard}
             selectedCard={selectedCard}
             onClose={handleCloseModal}
           />

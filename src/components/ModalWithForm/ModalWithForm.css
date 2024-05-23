@@ -99,3 +99,27 @@
   gap: 8px;
   margin-bottom: 32px;
 }
+
+.modal__delete-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__button-confirm {
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: red;
+  border: none;
+  background-color: white;
+}
+
+.modal__button-cancel {
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  background-color: white;
+  border: none;
+}

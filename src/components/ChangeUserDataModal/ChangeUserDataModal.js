@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const ChangeUserDataModal = ({ handleCloseModal, isOpen }) => {
+const ChangeUserDataModal = ({
+  handleCloseModal,
+  isOpen,
+  onHandleChangeData,
+}) => {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
     console.log(e.target.value);
@@ -14,17 +18,17 @@ const ChangeUserDataModal = ({ handleCloseModal, isOpen }) => {
     setAvatar(e.target.value);
   };
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     onHandleLoginUser({ name, avatar });
-  //   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onHandleChangeData({ name, avatar });
+  };
 
   return (
     <ModalWithForm
       title="Change profile data"
       onClose={handleCloseModal}
       isOpen={isOpen}
-      //   onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
       buttonText="Save Changes"
       // onHandleItemSubmit={onHandleItemSubmit}
     >
