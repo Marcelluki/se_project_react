@@ -2,7 +2,7 @@ import "./SideBar.css";
 import avatar from "../../images/avatar.svg";
 import { Link } from "react-router-dom";
 
-const SideBar = ({ currentUser, onChangeData }) => (
+const SideBar = ({ currentUser, onChangeData, onSignOut }) => (
   <section className="profile__section">
     <div className="profile__user">
       <img
@@ -23,7 +23,11 @@ const SideBar = ({ currentUser, onChangeData }) => (
       >
         Change profile data
       </button>
-      <button className="profile__logout" type="text">
+      <button
+        className="profile__logout"
+        type="text"
+        onClick={() => onSignOut(currentUser)}
+      >
         Log out
       </button>
     </div>

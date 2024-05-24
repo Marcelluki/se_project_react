@@ -21,7 +21,7 @@ import {
   getUser,
 } from "../../utils/api";
 import { registerUser, login } from "../../utils/auth";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useHistory } from "react";
 import { Navigate, useNavigate, Routes, Route } from "react-router-dom";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -47,6 +47,8 @@ function App() {
     _id: "",
   });
   const [loggedIn, setLoggedIn] = useState(false);
+
+  // const history = useHistory();
 
   console.log({ currentUser });
 
@@ -156,6 +158,22 @@ function App() {
       _id: user._id,
     });
     handleCloseModal();
+  };
+
+  useEffect(() => {
+    // Check local storage for token when component mounts
+    const token = localStorage.getItem("token");
+    if (token) {
+      setLoggedIn(true);
+    }
+    setLoggedIn(false);
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+    navigate("/login");
+    // history.push("/login");
   };
 
   const handleLoginModalSubmit = (user) => {
@@ -271,6 +289,7 @@ function App() {
                 currentUser={currentUser}
                 onCardLike={handleCardLike}
                 onChangeData={() => setActiveModal("changeData")}
+                onSignOut={handleSignOut}
               />
             }
           />
