@@ -160,17 +160,17 @@ function App() {
     handleCloseModal();
   };
 
-  useEffect(() => {
-    // Check local storage for token when component mounts
-    const token = localStorage.getItem("token");
-    if (token) {
-      setLoggedIn(true);
-    }
-    setLoggedIn(false);
-  }, []);
+  // useEffect(() => {
+  //   // Check local storage for token when component mounts
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setLoggedIn(true);
+  //   }
+  //   setLoggedIn(false);
+  // }, []);
 
   const handleSignOut = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("jwt");
     setLoggedIn(false);
     navigate("/login");
     // history.push("/login");
