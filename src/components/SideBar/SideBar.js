@@ -11,7 +11,7 @@ const SideBar = ({ currentUser, onChangeData, onSignOut }) => (
         alt="Profile logo"
       />
 
-      <Link className="header__name" to="/profile">
+      <Link className="profile__name" to="/profile">
         {currentUser.name}
       </Link>
     </div>

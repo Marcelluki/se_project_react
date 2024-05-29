@@ -14,6 +14,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### `npm dev`
+
+Runs back-end application. /
+https://github.com/Marcelluki/se_project_express.git
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\

@@ -140,10 +140,8 @@ function App() {
     registerUser(user)
       .then((newUser) => {
         handleLoginModalSubmit(user);
-        handleCloseModal();
-        navigate("/profile");
       })
-      .then(checkResponse)
+      // .then(checkResponse)
       .catch((error) => {
         console.log(error);
       });
@@ -158,6 +156,7 @@ function App() {
       _id: user._id,
     });
     handleCloseModal();
+    navigate("/profile");
   };
 
   // useEffect(() => {
@@ -184,6 +183,10 @@ function App() {
       .then((res) => {
         handleLogin(res);
         localStorage.setItem("jwt", res.token);
+      })
+      .then(() => {
+        handleCloseModal();
+        navigate("/profile");
       })
       .catch((error) => {
         console.error(error);
