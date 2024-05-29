@@ -104,6 +104,19 @@
   display: flex;
   flex-direction: column;
 }
+.modal__delete-question-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__delete-question {
+  width: 367px;
+  height: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 20px;
+}
 
 .modal__button-confirm {
   font-family: Cabinet Grotesk;
@@ -113,6 +126,8 @@
   color: red;
   border: none;
   background-color: white;
+  font-size: 20px;
+  padding-bottom: 8px;
 }
 
 .modal__button-cancel {
@@ -122,4 +137,5 @@
   line-height: 20px;
   background-color: white;
   border: none;
+  font-size: 20px;
 }

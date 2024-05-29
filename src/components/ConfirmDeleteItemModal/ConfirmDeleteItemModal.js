@@ -21,11 +21,12 @@ const ConfirmDeleteItemModal = ({
       // onHandleItemSubmit={onHandleItemSubmit}
     >
       <div className="modal__delete-container">
-        <p className="modal__delete-question">
-          Are you sure you want to delete this item? This action is
-          irreversible.
-        </p>
-
+        <div className="modal__delete-question-container">
+          <p className="modal__delete-question">
+            Are you sure you want to delete this item? This action is
+            irreversible.
+          </p>
+        </div>
         <button
           className="modal__button-confirm"
           onClick={() => onConfirmDelete(selectedCard)}
