@@ -1,5 +1,39 @@
 # Getting Started with Create React App
 
+Project WTWR
+
+- This application is a fullstack weather web application that allows users to register with an avatar and log into the account created. Users may add clothes with a name image and weather type of the clothing. the application finds clothes and displays them depending on the weather at the users current location. furthermore, you can like/favorite you preffered clothes that have been added. in the end, if you decide that you dont want a certain article you can delete it.
+
+Technologies and Techniques used:
+
+React Library and JSX
+
+State Management
+
+- React State and Context API
+- Utilized useState and useEffect
+- Context for weather is used from OpenWeatherApi
+
+Routing
+
+-React Router v6 for handling naviation between pages seemlesly making the application appear to be single-page like with dynamic content. furthermore, authentication allows users to be routed to profile page when successfully logged in
+
+Styling
+
+-Css modules for all class and animation
+
+User Authentication
+
+-Backend authentication allows users to safely operate web app without needing to worry about element security.
+
+Back-end
+
+-ode.js and Express: Constructs the backend server to handle API requests, user authentication, and data storage.
+-MongoDB: Stores user data, including profiles, authentication details, and clothing articles
+
+**This project is used with the back-end server**
+[Link to backend repo] (https://github.com/Marcelluki/se_project_express.git)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -18,11 +52,6 @@ You may also see any lint errors in the console.
 
 Runs back-end application. /
 https://github.com/Marcelluki/se_project_express.git
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 

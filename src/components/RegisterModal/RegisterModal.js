@@ -32,7 +32,14 @@ const RegisterModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onHandleRegisterSubmit({ email, name, avatar, password });
+
+    const onDone = () => {
+      setEmail("");
+      setEmail("");
+      setEmail("");
+      setEmail("");
+    };
+    onHandleRegisterSubmit({ email, name, avatar, password }, onDone);
   };
 
   return (
