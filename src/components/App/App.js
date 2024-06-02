@@ -136,9 +136,10 @@ function App() {
   // const onAddItem = (values) => {
   //   console.log(values);
   // };
-  const handleRegisterSubmit = (user) => {
+  const handleRegisterSubmit = (user, onDone) => {
     registerUser(user)
       .then((newUser) => {
+        onDone();
         handleLoginModalSubmit(user);
       })
       // .then(checkResponse)

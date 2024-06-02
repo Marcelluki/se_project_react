@@ -35,9 +35,9 @@ const RegisterModal = ({
 
     const onDone = () => {
       setEmail("");
-      setEmail("");
-      setEmail("");
-      setEmail("");
+      setName("");
+      setPassword("");
+      setAvatar("");
     };
     onHandleRegisterSubmit({ email, name, avatar, password }, onDone);
   };

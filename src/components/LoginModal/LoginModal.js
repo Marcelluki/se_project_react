@@ -16,7 +16,12 @@ const LoginModal = ({ handleCloseModal, isOpen, onHandleLoginUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onHandleLoginUser({ email, password });
+
+    const onDone = () => {
+      setEmail("");
+      setPassword("");
+    };
+    onHandleLoginUser({ email, password }, onDone);
   };
 
   return (
