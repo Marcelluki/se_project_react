@@ -139,8 +139,7 @@ function App() {
   const handleRegisterSubmit = (user, onDone) => {
     registerUser(user)
       .then((newUser) => {
-        onDone();
-        handleLoginModalSubmit(user);
+        handleLoginModalSubmit(user, onDone);
       })
       // .then(checkResponse)
       .catch((error) => {
@@ -176,11 +175,11 @@ function App() {
     // history.push("/login");
   };
 
-  const handleLoginModalSubmit = (user) => {
+  const handleLoginModalSubmit = (user, onDone) => {
     if (!user.email || !user.password) {
       return;
     }
-    login(user)
+    login(user, onDone)
       .then((res) => {
         handleLogin(res);
         localStorage.setItem("jwt", res.token);
@@ -195,9 +194,9 @@ function App() {
     console.log(user);
   };
 
-  const handleItemSubmit = (item) => {
+  const handleItemSubmit = (item, onDone) => {
     const token = localStorage.getItem("jwt");
-    addItem(item, token)
+    addItem(item, token, onDone)
       .then((res) => {
         debugger;
         setItems((items) => [res.data, ...items]);
