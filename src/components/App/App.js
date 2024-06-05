@@ -182,6 +182,7 @@ function App() {
     login(user, onDone)
       .then((res) => {
         handleLogin(res);
+        onDone();
         localStorage.setItem("jwt", res.token);
       })
       .then(() => {
@@ -198,7 +199,9 @@ function App() {
     const token = localStorage.getItem("jwt");
     addItem(item, token, onDone)
       .then((res) => {
+        onDone();
         debugger;
+
         setItems((items) => [res.data, ...items]);
         handleCloseModal();
       })
